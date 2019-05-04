@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.stereoskopicimages.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\StereoskopicImages\\StereoskopicImages\\actions.json",
+      "action_manifest_path": "D:\\Stereoskopic\\actions.json",
       "strings": {
         "en_us": {
           "name": "StereoskopicImages [Testing]"
