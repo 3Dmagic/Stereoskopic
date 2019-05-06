@@ -39,6 +39,8 @@ public class ImageGalleryEditor : Editor
 
         Texture2D left = m_ImageDatabase.images[index].leftEyeImage;
         Texture2D right = m_ImageDatabase.images[index].rightEyeImage;
+        Texture2D sky = m_ImageDatabase.images[index].skyImage;
+        string description = m_ImageDatabase.images[index].description;
 
         GUI.Label(new Rect(rect.x + 5,rect.y + 25, 50, EditorGUIUtility.singleLineHeight)  , index.ToString() );
 
@@ -46,6 +48,13 @@ public class ImageGalleryEditor : Editor
         m_ImageDatabase.images[index].leftEyeImage = (Texture2D)EditorGUI.ObjectField(new Rect(rect.x + 80, rect.y + padding, 50, 50), "", left, typeof(Texture2D), true);
         GUI.Label(new Rect(rect.x + 150, rect.y + 25,50, EditorGUIUtility.singleLineHeight), "Right");
         m_ImageDatabase.images[index].rightEyeImage = (Texture2D)EditorGUI.ObjectField(new Rect(rect.x + 190, rect.y + padding, 50, 50), "", right, typeof(Texture2D), true);
+
+        //SKY
+        GUI.Label(new Rect(rect.x + 270, rect.y + 25,50, EditorGUIUtility.singleLineHeight), "SKY");
+        m_ImageDatabase.images[index].skyImage = (Texture2D)EditorGUI.ObjectField(new Rect(rect.x + 300, rect.y + padding, 50, 50), "", sky, typeof(Texture2D), true);
+        //Description
+        GUI.Label(new Rect(rect.x + 350, rect.y + 25,70, EditorGUIUtility.singleLineHeight), "Description");
+        m_ImageDatabase.images[index].description = EditorGUI.TextArea(new Rect(rect.x + 420, rect.y + padding, rect.width - 420, 50), description);
     }
 
     public override void OnInspectorGUI()

@@ -6,31 +6,18 @@ public class ToggleStereoSky : MonoBehaviour
 {
     public bool _stereoActive = true;
 
-    [SerializeField]
-    private Material _defaultSkyMat;
-    [SerializeField]
-    private Material _gallerySkyMat;
-    [SerializeField]
-    private GameObject _stereoObjects;
+    private StereoImageGallery _stereoImageGallery;
 
     private void Awake()
     {
+        _stereoImageGallery = GetComponent<StereoImageGallery>();
         ChangeSetting(_stereoActive);
     }
 
 
     public void ChangeSetting(bool stereoActive)
     {
-        if (stereoActive)
-        {
-            RenderSettings.skybox = _defaultSkyMat;
-            _stereoObjects.SetActive(true);
-        }
-        else
-        {
-            RenderSettings.skybox = _gallerySkyMat;
-            _stereoObjects.SetActive(false);
-        }
+        _stereoImageGallery.ChangeLayout(stereoActive);
     }
 
     // Update is called once per frame
