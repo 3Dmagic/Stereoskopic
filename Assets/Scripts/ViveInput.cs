@@ -17,30 +17,30 @@ public class ViveInput : MonoBehaviour
         _toggleStereoSky = GetComponent<ToggleStereoSky>();
 
         _stereoImageGallery = GetComponent<StereoImageGallery>();
-        _skyGallery = GetComponent<SkyGallery>();
+       // _skyGallery = GetComponent<SkyGallery>();
     }
 
     private void Next()
     {
-        if (_toggleStereoSky._stereoActive)
-        {
             _stereoImageGallery.NextImage();
-        }
-        else
-        {
-            _skyGallery.NextImage();
-        }
+        //if (_toggleStereoSky._stereoActive)
+        //{
+        //}
+        //else
+        //{
+        //    _skyGallery.NextImage();
+        //}
     }
     private void Prev()
     {
-        if (_toggleStereoSky._stereoActive)
-        {
             _stereoImageGallery.PreviousImage();
-        }
-        else
-        {
-            _skyGallery.PreviousImage();
-        }
+        //if (_toggleStereoSky._stereoActive)
+        //{
+        //}
+        //else
+        //{
+        //    _skyGallery.PreviousImage();
+        //}
 
     }
 

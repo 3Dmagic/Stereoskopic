@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DigitalRuby.Tween;
 using UnityEngine.UI;
+using Valve.VR;
 
 [System.Serializable]
 public class StereoImages
@@ -26,7 +27,9 @@ public class StereoImageGallery : MonoBehaviour
     public Material _defaultSkyMaterial;
     public Material _skyMaterial;
 
+    private bool _stereoActive = true;
     private int currentImageIndex = 0;
+    StereoImages currentImageSet;
 
     private bool isInTransition = false;
 
@@ -43,7 +46,7 @@ public class StereoImageGallery : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         ShowImagesByIndex(0,1);
 
-
+        ChangeLayout(_stereoActive);
         transitionSoundDuration = transitionSound.length;
     }
 
@@ -123,7 +126,7 @@ public class StereoImageGallery : MonoBehaviour
         _audioSource.Play();
 
         //Image to show
-        StereoImages currentImageSet = images[index];
+        currentImageSet = images[index];
         isInTransition = true;
 
         //Check for one missing image
@@ -181,6 +184,19 @@ public class StereoImageGallery : MonoBehaviour
         else
         {
             RenderSettings.skybox = _skyMaterial;
+        }
+    }
+
+    void Update()
+    {
+        if (SteamVR_Actions._default.ToggleStereoSky.GetStateDown(SteamVR_Input_Sources.Any))
+        {
+            if(currentImageSet.skyImage != null) { 
+            _stereoActive = !_stereoActive;
+
+            
+                ChangeLayout(_stereoActive);
+            }
         }
     }
 
