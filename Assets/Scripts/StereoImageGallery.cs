@@ -22,6 +22,7 @@ public class StereoImageGallery : MonoBehaviour
     public Material leftEyeMaterial;
     public Material rightEyeMaterial;
     public Text descriptionText;
+    public Text descriptionOutText;
     public Material glassMaterial;
 
     public Material _defaultSkyMaterial;
@@ -68,12 +69,25 @@ public class StereoImageGallery : MonoBehaviour
             leftEyeMaterial.SetFloat("_Offset", v1.CurrentValue);
             rightEyeMaterial.SetFloat("_Offset", v1.CurrentValue);
 
+            Vector3 textPos = descriptionText.rectTransform.anchoredPosition;
+            textPos.x = -v1.CurrentValue * 1000f;
+            descriptionText.rectTransform.anchoredPosition = textPos;
+
+            Vector3 textOutPos = descriptionOutText.rectTransform.anchoredPosition;
+            textOutPos.x = 1000f - (v1.CurrentValue * 1000f);
+            descriptionOutText.rectTransform.anchoredPosition = textOutPos;
+
         }, (v2) => {
            
             leftEyeMaterial.SetTexture("_InViewImage", ImageLeft);
             rightEyeMaterial.SetTexture("_InViewImage", ImageRight);
             leftEyeMaterial.SetFloat("_Offset", 0);
             rightEyeMaterial.SetFloat("_Offset", 0);
+
+            Text _oldText = descriptionOutText;
+            descriptionOutText = descriptionText;
+            descriptionText = _oldText;
+
             isInTransition = false;
         });
     }
@@ -93,12 +107,25 @@ public class StereoImageGallery : MonoBehaviour
             leftEyeMaterial.SetFloat("_Offset", v1.CurrentValue);
             rightEyeMaterial.SetFloat("_Offset", v1.CurrentValue);
 
+            Vector3 textPos = descriptionText.rectTransform.anchoredPosition;
+            textPos.x = 1000f - v1.CurrentValue * 1000f;
+            descriptionText.rectTransform.anchoredPosition = textPos;
+
+            Vector3 textOutPos = descriptionOutText.rectTransform.anchoredPosition;
+            textOutPos.x = (v1.CurrentValue * -1000f);
+            descriptionOutText.rectTransform.anchoredPosition = textOutPos;
+
         }, (v2) => {
            
             leftEyeMaterial.SetTexture("_InViewImage", ImageLeft);
             rightEyeMaterial.SetTexture("_InViewImage", ImageRight);
             leftEyeMaterial.SetFloat("_Offset", 0);
             rightEyeMaterial.SetFloat("_Offset", 0);
+
+            Text _oldText = descriptionOutText;
+            descriptionOutText = descriptionText;
+            descriptionText = _oldText;
+
             isInTransition = false;
         });
     }
@@ -129,6 +156,8 @@ public class StereoImageGallery : MonoBehaviour
         currentImageSet = images[index];
         isInTransition = true;
 
+        descriptionOutText.text = currentImageSet.description;
+
         //Check for one missing image
         if (currentImageSet.leftEyeImage == null || currentImageSet.rightEyeImage == null) { Debug.LogWarning($"No Image attached! Left: {currentImageSet.leftEyeImage}, Right {currentImageSet.rightEyeImage}"); yield break; }
 
@@ -141,7 +170,7 @@ public class StereoImageGallery : MonoBehaviour
             TweenImagesBackward(1, 0, currentImageSet.leftEyeImage, currentImageSet.rightEyeImage);
         }
 
-        descriptionText.text = currentImageSet.description;
+       // descriptionText.text = currentImageSet.description;
         glassMaterial.SetTexture("_EmissionMap", currentImageSet.leftEyeImage);
 
         if (currentImageSet.skyImage == null) { yield break; }
