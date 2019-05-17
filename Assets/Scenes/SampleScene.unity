@@ -299,7 +299,7 @@ MonoBehaviour:
   rightEyeMaterial: {fileID: 2100000, guid: ab97c0809d208af4994479cf5d1049c3, type: 2}
   descriptionText: {fileID: 1693954082}
   descriptionOutText: {fileID: 2135570335}
-  glassMaterial: {fileID: 2100000, guid: 4803ed860b09b4647b69db0cbb656eae, type: 2}
+  _entrySkyMaterial: {fileID: 0}
   _defaultSkyMaterial: {fileID: 2100000, guid: 9bc9ae14665486e498e4028dc75b6c25, type: 2}
   _skyMaterial: {fileID: 2100000, guid: 661312e9601a4b24ea46bd0b42a11812, type: 2}
   transitionSound: {fileID: 8300000, guid: 9f15763f8e413954598a8f7cd22d468e, type: 3}
@@ -1056,6 +1056,8 @@ MonoBehaviour:
   Description: {fileID: 765436244}
   ImageHolder: {fileID: 24605393}
   _grabObject: {fileID: 435656183}
+  _stereoImageGallery: {fileID: 0}
+  _isInGlass: 0
 --- !u!54 &974791784
 Rigidbody:
   m_ObjectHideFlags: 0

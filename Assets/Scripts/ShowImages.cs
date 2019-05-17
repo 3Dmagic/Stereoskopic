@@ -10,6 +10,8 @@ public class ShowImages : MonoBehaviour
     public GrabObject _grabObject;
     public StereoImageGallery _stereoImageGallery;
 
+    public bool _isInGlass;
+
 
     private void Awake()
     {
@@ -31,11 +33,14 @@ public class ShowImages : MonoBehaviour
     {
         if (other.CompareTag("MainCamera")) {
             ShowGlass(false);
+
+            _isInGlass = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+            _isInGlass = false;
         ShowGlass(true);
     }
 

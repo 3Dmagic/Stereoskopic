@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _InViewImage:
-        m_Texture: {fileID: 2800000, guid: e90f9f4e141e198438a198ec66567628, type: 3}
+        m_Texture: {fileID: 2800000, guid: e2d5121b7daf4fb4b96525f391c75a6a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutViewImage:
-        m_Texture: {fileID: 2800000, guid: e90f9f4e141e198438a198ec66567628, type: 3}
+        m_Texture: {fileID: 2800000, guid: e2d5121b7daf4fb4b96525f391c75a6a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
