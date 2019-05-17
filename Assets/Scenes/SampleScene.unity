@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13737607, g: 0.17701147, b: 0.2105554, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -295,12 +295,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _okular: {fileID: 435656182}
-  leftEyeMaterial: {fileID: 2100000, guid: 192e10ad4d46d0a408df764cf81981ac, type: 2}
-  rightEyeMaterial: {fileID: 2100000, guid: ab97c0809d208af4994479cf5d1049c3, type: 2}
+  descriptionRahmen: {fileID: 765436244}
+  stereoHolder: {fileID: 24605393}
   descriptionText: {fileID: 1693954082}
   descriptionOutText: {fileID: 2135570335}
+  _showImages: {fileID: 974791783}
+  leftEyeMaterial: {fileID: 2100000, guid: 192e10ad4d46d0a408df764cf81981ac, type: 2}
+  rightEyeMaterial: {fileID: 2100000, guid: ab97c0809d208af4994479cf5d1049c3, type: 2}
   _entrySkyMaterial: {fileID: 2100000, guid: 235a95dedc4213d43a88249cf79a4d96, type: 2}
-  _defaultSkyMaterial: {fileID: 2100000, guid: 9bc9ae14665486e498e4028dc75b6c25, type: 2}
+  _stereoSkyBG: {fileID: 2100000, guid: 9bc9ae14665486e498e4028dc75b6c25, type: 2}
   _skyMaterial: {fileID: 2100000, guid: 661312e9601a4b24ea46bd0b42a11812, type: 2}
   transitionSound: {fileID: 8300000, guid: 9f15763f8e413954598a8f7cd22d468e, type: 3}
   glockenSound: {fileID: 8300000, guid: ae3a795899c6e6840abac9d94ca0eb7a, type: 3}
@@ -308,22 +311,27 @@ MonoBehaviour:
   - leftEyeImage: {fileID: 2800000, guid: f4077685b1e27664d8db3b3ffc4d80ec, type: 3}
     rightEyeImage: {fileID: 2800000, guid: e2d5121b7daf4fb4b96525f391c75a6a, type: 3}
     skyImage: {fileID: 0}
+    skyAudio: {fileID: 0}
     description: Image 1
   - leftEyeImage: {fileID: 2800000, guid: 6cbac0cecc97dc54ebead4673c4295bf, type: 3}
     rightEyeImage: {fileID: 2800000, guid: e90f9f4e141e198438a198ec66567628, type: 3}
     skyImage: {fileID: 2800000, guid: 9349928546a607c48bba4347dd6585ff, type: 3}
+    skyAudio: {fileID: 0}
     description: Image 2
   - leftEyeImage: {fileID: 2800000, guid: 1464ca45a3f540746976665930ca8fa0, type: 3}
     rightEyeImage: {fileID: 2800000, guid: 516e4ad68b298bf47a4e2834ee997a2f, type: 3}
     skyImage: {fileID: 0}
+    skyAudio: {fileID: 0}
     description: Image 3
-  - leftEyeImage: {fileID: 0}
-    rightEyeImage: {fileID: 0}
+  - leftEyeImage: {fileID: 2800000, guid: b27b008b61032ab41acac531081a2efd, type: 3}
+    rightEyeImage: {fileID: 2800000, guid: cc54aa39a139e534f84aeaa0274dff08, type: 3}
     skyImage: {fileID: 0}
+    skyAudio: {fileID: 0}
     description: "Kaiserpanorama\nM\xFCnchner Stadtmuseum"
   - leftEyeImage: {fileID: 2800000, guid: b27b008b61032ab41acac531081a2efd, type: 3}
     rightEyeImage: {fileID: 2800000, guid: cc54aa39a139e534f84aeaa0274dff08, type: 3}
     skyImage: {fileID: 2800000, guid: 80d3636cfd8414943be2fbc740e99556, type: 3}
+    skyAudio: {fileID: 0}
     description: "ICE Hbf M\xFCnchen"
 --- !u!4 &199743165
 Transform:
@@ -631,7 +639,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!43 &502772796
+--- !u!43 &605168601
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1052,11 +1060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ec47f8c4ec97c41a397a6e474f9a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  okular: {fileID: 435656182}
-  Description: {fileID: 765436244}
-  ImageHolder: {fileID: 24605393}
-  _grabObject: {fileID: 435656183}
-  _stereoImageGallery: {fileID: 0}
 --- !u!54 &974791784
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1343,40 +1346,6 @@ Transform:
   m_Father: {fileID: 1328423638}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1115114004
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1118354593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1579,6 +1548,40 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!21 &1434803052
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &1543141986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2223,11 +2226,11 @@ PrefabInstance:
     - target: {fileID: 2348914, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1115114004}
+      objectReference: {fileID: 1434803052}
     - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 502772796}
+      objectReference: {fileID: 605168601}
     - target: {fileID: 20000014031267948, guid: 4d293c8e162f3874b982baadd71153d2,
         type: 3}
       propertyPath: m_TargetEye
