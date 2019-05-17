@@ -107,7 +107,11 @@ Shader "InvisibleRoom/Stereo"
 				ifLocalVar36 = ifLocalVar35;
 				
 				
+<<<<<<< HEAD
+				finalColor = ( ( 1.0 - pow( ( length( ( i.ase_texcoord.xy + float2( -0.5,-0.5 ) ) ) / 0.6 ) , 8.61 ) ) * ( ifLocalVar34 + ifLocalVar36 ) );
+=======
 				finalColor = ( ( 1.0 - pow( ( length( ( i.ase_texcoord.xy + float2( -0.5,-0.5 ) ) ) / 0.7 ) , 8.61 ) ) * ( ifLocalVar34 + ifLocalVar36 ) );
+>>>>>>> f2825b7f5bc8de43be874d0ce146de991f991870
 				return finalColor;
 			}
 			ENDCG
@@ -119,7 +123,11 @@ Shader "InvisibleRoom/Stereo"
 }
 /*ASEBEGIN
 Version=16700
+<<<<<<< HEAD
+62;1;1262;1051;304.6663;467.9185;1.3;True;False
+=======
 7;1;1452;894;20.61621;720.7687;1.3;True;True
+>>>>>>> f2825b7f5bc8de43be874d0ce146de991f991870
 Node;AmplifyShaderEditor.TexCoordVertexDataNode;30;-1192.577,-261.9927;Float;False;0;2;0;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;12;-1205.683,-20.86602;Float;False;Property;_Offset;Offset;0;0;Create;True;0;0;False;0;0;0;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;32;-972.0811,-50.81401;Float;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -130,6 +138,13 @@ Node;AmplifyShaderEditor.TexCoordVertexDataNode;42;261.4837,-278.1185;Float;Fals
 Node;AmplifyShaderEditor.DynamicAppendNode;31;-672.482,15.95564;Float;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.DynamicAppendNode;38;-723.3718,306.7413;Float;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;44;466.8838,-232.6186;Float;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
+<<<<<<< HEAD
+Node;AmplifyShaderEditor.RangedFloatNode;48;508.4836,-1.21859;Float;False;Constant;_Float0;Float 0;3;0;Create;True;0;0;False;0;0.6;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;1;-490.6834,-207.5893;Float;True;Property;_InViewImage;InViewImage;1;0;Create;True;0;0;False;0;None;e2d5121b7daf4fb4b96525f391c75a6a;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;2;-519.8908,457.0325;Float;True;Property;_OutViewImage;OutViewImage;2;0;Create;True;0;0;False;0;None;e2d5121b7daf4fb4b96525f391c75a6a;True;0;False;black;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;28;-393.5506,131.8973;Float;False;Constant;_Color0;Color 0;3;0;Create;True;0;0;False;0;0,0,0,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+=======
+>>>>>>> f2825b7f5bc8de43be874d0ce146de991f991870
 Node;AmplifyShaderEditor.LengthOpNode;43;602.0836,-232.6186;Float;True;1;0;FLOAT2;0,0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ColorNode;28;-393.5506,131.8973;Float;False;Constant;_Color0;Color 0;3;0;Create;True;0;0;False;0;0,0,0,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;2;-519.8908,457.0325;Float;True;Property;_OutViewImage;OutViewImage;2;0;Create;True;0;0;False;0;None;e90f9f4e141e198438a198ec66567628;True;0;False;black;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -155,9 +170,15 @@ WireConnection;38;0;39;0
 WireConnection;38;1;30;2
 WireConnection;44;0;42;0
 WireConnection;44;1;45;0
+<<<<<<< HEAD
+WireConnection;1;1;31;0
+WireConnection;2;1;38;0
+WireConnection;43;0;44;0
+=======
 WireConnection;43;0;44;0
 WireConnection;2;1;38;0
 WireConnection;1;1;31;0
+>>>>>>> f2825b7f5bc8de43be874d0ce146de991f991870
 WireConnection;27;0;32;0
 WireConnection;27;2;1;0
 WireConnection;27;4;28;0
@@ -178,4 +199,8 @@ WireConnection;46;0;53;0
 WireConnection;46;1;37;0
 WireConnection;0;0;46;0
 ASEEND*/
+<<<<<<< HEAD
+//CHKSM=C9E3CB2412581DE7DE493AE0BE4F99CFC48C7BA0
+=======
 //CHKSM=205BAAA03A2079DD6E7A03BA30FBE76FB57B453D
+>>>>>>> f2825b7f5bc8de43be874d0ce146de991f991870
