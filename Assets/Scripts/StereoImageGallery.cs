@@ -11,6 +11,7 @@ public class StereoImages
     public Texture2D leftEyeImage;
     public Texture2D rightEyeImage;
     public Texture2D skyImage;
+    public AudioClip skyAudio;
     public string description;
 }
 
@@ -18,14 +19,20 @@ public class StereoImages
 public class StereoImageGallery : MonoBehaviour
 {
     public GameObject _okular;
+    public GameObject descriptionRahmen;
+    public GameObject stereoHolder;
 
-    public Material leftEyeMaterial;
-    public Material rightEyeMaterial;
     public Text descriptionText;
     public Text descriptionOutText;
 
+    public ShowImages _showImages;
+    private bool _isInGlass = false;
+
+    public Material leftEyeMaterial;
+    public Material rightEyeMaterial;
+
     public Material _entrySkyMaterial;
-    public Material _defaultSkyMaterial;
+    public Material _stereoSkyBG;
     public Material _skyMaterial;
 
     private bool _stereoActive = true;
@@ -34,6 +41,7 @@ public class StereoImageGallery : MonoBehaviour
 
     private bool isInTransition = false;
 
+    private AudioSource _skyAudioPlayer;
     private AudioSource _audioSource;
     public AudioClip transitionSound;
     public AudioClip glockenSound;
@@ -45,13 +53,31 @@ public class StereoImageGallery : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
+        _skyAudioPlayer = CreateSkyAudio();
+
         ShowImagesByIndex(0,1);
 
-        ChangeLayout(_stereoActive);
+        SetStereoSky(true, false);
+
         transitionSoundDuration = transitionSound.length;
 
         RenderSettings.skybox = _entrySkyMaterial;
+
+        
+
+        _showImages.okularTriggerAction += OkularTriggerAction;
     }
+
+
+    AudioSource CreateSkyAudio()
+    {
+        GameObject _audioPlayerObject = new GameObject();
+        _audioPlayerObject.transform.SetParent(_okular.transform);
+        AudioSource skyAudioPlayer = _audioPlayerObject.AddComponent<AudioSource>();
+        skyAudioPlayer.loop = true;
+        return skyAudioPlayer;
+    }
+
 
     public bool CheckForNoImage()
     {
@@ -138,8 +164,9 @@ public class StereoImageGallery : MonoBehaviour
         _audioSource.clip = glockenSound;
         _audioSource.Play();
 
+        _skyAudioPlayer.Stop();
         //Set default to stereoImage
-        ChangeLayout(true);
+        SetStereoSky(!_isInGlass,false);
 
         //Change Image after glockensound
         StartCoroutine(ChangeImageByIndex(transitionSound.length, index, direction));
@@ -182,7 +209,6 @@ public class StereoImageGallery : MonoBehaviour
     public void NextImage()
     {
         if (CheckForNoImage() && !isInTransition ) {
-
             
             //Calculate next Index
             currentImageIndex = currentImageIndex >= images.Count - 1  ? 0 : currentImageIndex + 1;
@@ -203,31 +229,74 @@ public class StereoImageGallery : MonoBehaviour
     }
 
 
-    public void ChangeSky(bool _isInGlass)
+    void OkularTriggerAction(bool isInGlass)
     {
-        RenderSettings.skybox = _isInGlass ? _defaultSkyMaterial : _entrySkyMaterial;
+        _isInGlass = isInGlass;
+
+        Debug.Log("okularTriggerAction");
+
+        SetStereoSky(!isInGlass, false);
     }
 
-    public void ChangeLayout(bool stereoActive)
+    public void SetStereoSky(bool _isStereoSceneActive, bool showSky)
     {
-        _okular.SetActive(stereoActive);
-        if (stereoActive)
+        if (_isInGlass) { _isStereoSceneActive = false; }
+        
+        _okular.GetComponent<Renderer>().enabled = _isStereoSceneActive;
+        descriptionRahmen.SetActive(_isStereoSceneActive);
+
+
+        if ( _isStereoSceneActive || showSky )
         {
-            RenderSettings.skybox = _defaultSkyMaterial;
+
+            stereoHolder.SetActive(false);
         }
         else
         {
-            RenderSettings.skybox = _skyMaterial;
+            stereoHolder.SetActive(true);
+        }
+        if (showSky)
+        {
+            if(currentImageSet.skyImage != null) { 
+                RenderSettings.skybox = _skyMaterial;
+                _skyAudioPlayer.clip = currentImageSet.skyAudio != null ? currentImageSet.skyAudio : null;
+                if (_skyAudioPlayer.clip != null) { _skyAudioPlayer.Play(); }
+            }
+        }
+        else
+        {
+            _skyAudioPlayer.Stop();
+            RenderSettings.skybox = _isInGlass ? _stereoSkyBG : _entrySkyMaterial;
         }
     }
+
+    public void ShowSkyImage(bool showSky)
+    {
+        if (showSky)
+        {
+            if(currentImageSet.skyImage == null) { stereoHolder.SetActive(true); return; }
+            stereoHolder.SetActive(false);
+        }
+        else
+        {
+            stereoHolder.SetActive(true);
+        }
+    }
+
+
+    
+
 
     void Update()
     {
         if (SteamVR_Actions._default.ToggleStereoSky.GetStateDown(SteamVR_Input_Sources.Any))
         {
-            if(currentImageSet.skyImage != null) { 
+            if(currentImageSet.skyImage != null && _isInGlass) { 
                 _stereoActive = !_stereoActive;
-                ChangeLayout(_stereoActive);
+
+                SetStereoSky(true, _stereoActive);
+
+                ShowSkyImage(_stereoActive);
             }
         }
     }
