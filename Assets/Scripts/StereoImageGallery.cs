@@ -23,8 +23,8 @@ public class StereoImageGallery : MonoBehaviour
     public Material rightEyeMaterial;
     public Text descriptionText;
     public Text descriptionOutText;
-    public Material glassMaterial;
 
+    public Material _entrySkyMaterial;
     public Material _defaultSkyMaterial;
     public Material _skyMaterial;
 
@@ -49,6 +49,8 @@ public class StereoImageGallery : MonoBehaviour
 
         ChangeLayout(_stereoActive);
         transitionSoundDuration = transitionSound.length;
+
+        RenderSettings.skybox = _entrySkyMaterial;
     }
 
     public bool CheckForNoImage()
@@ -170,9 +172,7 @@ public class StereoImageGallery : MonoBehaviour
             TweenImagesBackward(1, 0, currentImageSet.leftEyeImage, currentImageSet.rightEyeImage);
         }
 
-       // descriptionText.text = currentImageSet.description;
-        glassMaterial.SetTexture("_EmissionMap", currentImageSet.leftEyeImage);
-
+      
         if (currentImageSet.skyImage == null) { yield break; }
         _skyMaterial.mainTexture = currentImageSet.skyImage;
 
@@ -203,6 +203,11 @@ public class StereoImageGallery : MonoBehaviour
     }
 
 
+    public void ChangeSky(bool _isInGlass)
+    {
+        RenderSettings.skybox = _isInGlass ? _defaultSkyMaterial : _entrySkyMaterial;
+    }
+
     public void ChangeLayout(bool stereoActive)
     {
         _okular.SetActive(stereoActive);
@@ -221,9 +226,7 @@ public class StereoImageGallery : MonoBehaviour
         if (SteamVR_Actions._default.ToggleStereoSky.GetStateDown(SteamVR_Input_Sources.Any))
         {
             if(currentImageSet.skyImage != null) { 
-            _stereoActive = !_stereoActive;
-
-            
+                _stereoActive = !_stereoActive;
                 ChangeLayout(_stereoActive);
             }
         }

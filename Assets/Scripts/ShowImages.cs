@@ -8,6 +8,8 @@ public class ShowImages : MonoBehaviour
     public GameObject Description;
     public GameObject ImageHolder;
     public GrabObject _grabObject;
+    public StereoImageGallery _stereoImageGallery;
+
 
     private void Awake()
     {
@@ -16,20 +18,25 @@ public class ShowImages : MonoBehaviour
         Description.SetActive(true);
     }
 
+    public void ShowGlass(bool showGlass)
+    {
+        okular.GetComponent<MeshRenderer>().enabled = showGlass;
+        Description.SetActive(showGlass);        
+        ImageHolder.SetActive(!showGlass);
+
+        _stereoImageGallery.ChangeSky(!showGlass);
+    } 
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("MainCamera")) { 
-            okular.GetComponent<MeshRenderer>().enabled = false;
-            Description.SetActive(false);
-            ImageHolder.SetActive(true);
+        if (other.CompareTag("MainCamera")) {
+            ShowGlass(false);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        okular.GetComponent<MeshRenderer>().enabled = true;
-        Description.SetActive(true);
-        ImageHolder.SetActive(false);
+        ShowGlass(true);
     }
 
 
