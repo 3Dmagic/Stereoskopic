@@ -19,6 +19,7 @@ public class StereoImages
 public class StereoImageGallery : MonoBehaviour
 {
     public GameObject _okular;
+    private BoxCollider _okularCollider;
     public GameObject descriptionRahmen;
     public GameObject stereoHolder;
 
@@ -54,6 +55,8 @@ public class StereoImageGallery : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _skyAudioPlayer = CreateSkyAudio();
+
+        _okularCollider = GameObject.Find("VisualTrigger").gameObject.GetComponent<BoxCollider>() ;
 
         ShowImagesByIndex(0,1);
 
@@ -231,11 +234,13 @@ public class StereoImageGallery : MonoBehaviour
 
     void OkularTriggerAction(bool isInGlass)
     {
-        _isInGlass = isInGlass;
+        if(_isInGlass != isInGlass) { 
+            _isInGlass = isInGlass;
 
-        Debug.Log("okularTriggerAction");
+            Debug.Log("okularTriggerAction");
 
-        SetStereoSky(!isInGlass, false);
+            SetStereoSky(!isInGlass, false);
+        }
     }
 
     public void SetStereoSky(bool _isStereoSceneActive, bool showSky)
@@ -259,12 +264,15 @@ public class StereoImageGallery : MonoBehaviour
         {
             if(currentImageSet.skyImage != null) { 
                 RenderSettings.skybox = _skyMaterial;
+
+                _okularCollider.size = new Vector3(100,100,100);
                 _skyAudioPlayer.clip = currentImageSet.skyAudio != null ? currentImageSet.skyAudio : null;
                 if (_skyAudioPlayer.clip != null) { _skyAudioPlayer.Play(); }
             }
         }
         else
         {
+            _okularCollider.size = new Vector3(.28f,.12f,.14f);
             _skyAudioPlayer.Stop();
             RenderSettings.skybox = _isInGlass ? _stereoSkyBG : _entrySkyMaterial;
         }

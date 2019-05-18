@@ -13,7 +13,13 @@ public class ShowImages : MonoBehaviour
             okularTriggerAction?.Invoke(true);
         }
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("MainCamera"))
+        {
+            okularTriggerAction?.Invoke(true);
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         okularTriggerAction?.Invoke(false);
